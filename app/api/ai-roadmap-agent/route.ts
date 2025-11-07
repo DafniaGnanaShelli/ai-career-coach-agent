@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
   }
 
 }
-export async function getRuns(runId: string) {
+async function getRuns(runId: string) {
   try {
     const result = await axios.get(
       `${process.env.INNGEST_SERVER_HOST}/v1/events/${runId}/runs`,
