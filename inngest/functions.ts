@@ -22,42 +22,196 @@ export const AiRoadmapGeneratorAgent = createAgent(
   {
     name: "AiRoadmapGeneratorAgent",
     description: 'Generate Details Tree Like Flow Roadmap',
-    system: `Generate a React flow tree-structured learning roadmap for user input position/ skills the following format:
- vertical tree structure with meaningful x/y positions to form a flow
+    system: `
 
-- Structure should be similar to roadmap.sh layout
-- Steps should be ordered from fundamentals to advanced
-- Include branching for different specializations (if applicable)
-- Each node must have a title, short description, and learning resource link
-- Use unique IDs for all nodes and edges
-- make it more specious node position, 
-- Response n JSON format
+
+    Generate a React Flow–compatible learning roadmap for the given user role or skill set.
+The roadmap must visually resemble the layout of roadmap.sh
+, following a vertical tree structure with meaningful x and y coordinates to ensure a clean flow from foundational to advanced concepts.
+
+🧩 Output Requirements
+1. Structure
+
+Use a vertical hierarchical layout with proper spacing between nodes.
+
+Follow a progressive order:
+
+Fundamentals → Intermediate → Advanced
+
+Include branching paths for different specialization areas (e.g., frontend vs backend).
+
+Ensure nodes are spaciously positioned to maintain visual clarity and readability.
+
+2. Node Specifications
+
+Each node must:
+
+Have a unique ID
+
+Use type "turbo"
+
+There must be atleast 50px vertical spacing between nodes
+
+Contain a position object with numeric { x, y } coordinates
+
+Include a data object with:
+
+title: short, clear topic name
+
+description: concise learning summary
+
+link: one high-quality learning resource (official docs, tutorials, or guides)
+
+3. Edge Specifications
+
+Each edge must:
+
+Have a unique ID (e.g., "e1-2")
+
+Define source and target node IDs to represent the roadmap flow
+
+4. Output Format
+
+Response must be valid JSON
+
+No markdown, comments, or null values
+
+Must include top-level keys:
+
+"roadmapTitle"
+
+"description"
+
+"duration"
+
+"initialNodes"
+
+"initialEdges"
+
+📘 Example Output
 {
-roadmapTitle:'',
-description:<3-5 Lines>,
-duration:'',
-initialNodes : [
-{
- id: '1',
- type: 'turbo',
- position: { x: 0, y: 0 },
- data: {
-title: 'Step Title',
-description: 'Short two-line explanation of what the step covers.',
-link: 'Helpful link for learning this step',
- },
-},
-...
-],
-initialEdges : [
-{
- id: 'e1-2',
- source: '1',
- target: '2',
-},
-...
-];
+  "roadmapTitle": "Full Stack Web Development Roadmap",
+  "description": "A comprehensive learning path to become a Full Stack Developer, covering both frontend and backend technologies. This roadmap starts from the basics and progresses to advanced topics with branching for different specializations.",
+  "duration": "12-18 months",
+  "initialNodes": [
+    {
+      "id": "1",
+      "type": "turbo",
+      "position": { "x": 0, "y": 0 },
+      "data": {
+        "title": "Internet Basics",
+        "description": "Understand how the web works, covering HTTP/HTTPS, DNS, domain names, hosting, and browsers.",
+        "link": "https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work"
+      }
+    },
+    {
+      "id": "2",
+      "type": "turbo",
+      "position": { "x": 0, "y": 120 },
+      "data": {
+        "title": "HTML & CSS",
+        "description": "Learn HTML5 semantic elements, CSS3, Flexbox, Grid, and responsive web design principles.",
+        "link": "https://www.freecodecamp.org/learn/2022/responsive-web-design/"
+      }
+    },
+    {
+      "id": "3",
+      "type": "turbo",
+      "position": { "x": 0, "y": 240 },
+      "data": {
+        "title": "JavaScript Fundamentals",
+        "description": "Master core JavaScript concepts: ES6+, DOM manipulation, asynchronous programming, and algorithms.",
+        "link": "https://javascript.info/"
+      }
+    },
+    {
+      "id": "4",
+      "type": "turbo",
+      "position": { "x": -250, "y": 380 },
+      "data": {
+        "title": "Frontend Frameworks",
+        "description": "Choose React, Angular, or Vue. Learn component architecture, routing, and state management.",
+        "link": "https://react.dev/learn"
+      }
+    },
+    {
+      "id": "5",
+      "type": "turbo",
+      "position": { "x": -250, "y": 520 },
+      "data": {
+        "title": "Advanced Frontend",
+        "description": "Learn TypeScript, advanced state management (Redux/Zustand), testing (Jest), and performance optimization.",
+        "link": "https://www.typescriptlang.org/docs/"
+      }
+    },
+    {
+      "id": "6",
+      "type": "turbo",
+      "position": { "x": 250, "y": 380 },
+      "data": {
+        "title": "Backend Programming",
+        "description": "Choose Node.js, Python, or Java. Learn server-side programming, REST APIs, and middleware concepts.",
+        "link": "https://nodejs.org/en/docs/guides/getting-started-guide"
+      }
+    },
+    {
+      "id": "7",
+      "type": "turbo",
+      "position": { "x": 250, "y": 520 },
+      "data": {
+        "title": "Databases",
+        "description": "Understand relational (MySQL/PostgreSQL) and NoSQL (MongoDB) database systems with CRUD operations.",
+        "link": "https://www.postgresqltutorial.com/"
+      }
+    },
+    {
+      "id": "8",
+      "type": "turbo",
+      "position": { "x": 0, "y": 660 },
+      "data": {
+        "title": "DevOps & Deployment",
+        "description": "Learn Docker, CI/CD pipelines, and deploy applications using AWS, Azure, or GCP.",
+        "link": "https://docs.docker.com/get-started/"
+      }
+    },
+    {
+      "id": "9",
+      "type": "turbo",
+      "position": { "x": 0, "y": 800 },
+      "data": {
+        "title": "System Design",
+        "description": "Explore scalability concepts like microservices, load balancing, caching, and distributed systems.",
+        "link": "https://github.com/donnemartin/system-design-primer"
+      }
+    }
+  ],
+  "initialEdges": [
+    { "id": "e1-2", "source": "1", "target": "2" },
+    { "id": "e2-3", "source": "2", "target": "3" },
+    { "id": "e3-4", "source": "3", "target": "4" },
+    { "id": "e3-6", "source": "3", "target": "6" },
+    { "id": "e4-5", "source": "4", "target": "5" },
+    { "id": "e6-7", "source": "6", "target": "7" },
+    { "id": "e5-8", "source": "5", "target": "8" },
+    { "id": "e7-8", "source": "7", "target": "8" },
+    { "id": "e8-9", "source": "8", "target": "9" }
+  ]
 }
+
+🧠 Prompt Template (for API or Automation Use)
+Generate a React Flow–compatible JSON learning roadmap for the given user role or skill set.
+
+Requirements:
+- Vertical tree layout, similar to roadmap.sh
+- Order topics from fundamentals to advanced
+- Include branching for specializations
+- Each node must have: title, description, link
+- Use unique IDs and meaningful x/y positions (spacious and visually clear)
+- Return only valid JSON as per the defined format
+
+User Role: {{userRole}}
+Skills: {{skillInput}}
+
 
 `
     ,
@@ -78,8 +232,108 @@ export const AiRoadmapAgent = inngest.createFunction(
     const roadmapResult = await AiRoadmapGeneratorAgent.run(userInput);
     //@ts-ignore
     const rawContent = roadmapResult.output[0]?.content;
-    const rawContentJson = rawContent.replace('```json', '').replace('```', '');
-    const parseJson = JSON.parse(rawContentJson);
+
+    // Clean and parse JSON
+    function cleanJsonString(jsonString: string) {
+      let cleaned = jsonString;
+      // Remove any leading/trailing whitespace and newlines
+      cleaned = cleaned.trim();
+      // Remove any comments (both single and multi-line)
+      cleaned = cleaned.replace(/\/\*[\s\S]*?\*\//g, '');
+      // Remove JSON code block markers if any
+      cleaned = cleaned.replace(/^```(?:json)?|```$/g, '');
+      // Remove control characters except for newlines and tabs
+      cleaned = cleaned.replace(/[\u0000-\u001F\u007F-\u009F]/g, char =>
+        char === '\n' || char === '\t' ? char : ''
+      );
+      // Handle escaped characters
+      cleaned = cleaned.replace(/\\(["\\/bfnrt])/g, (_, char) => {
+        switch (char) {
+          case 'b': return '\\b';
+          case 'f': return '\\f';
+          case 'n': return '\\n';
+          case 'r': return '\\r';
+          case 't': return '\\t';
+          default: return `\\${char}`;
+        }
+      });
+      return cleaned.trim();
+    };
+
+    let cleanedJson = cleanJsonString(rawContent);
+    let parseJson;
+
+    // Try to extract JSON if the response includes markdown code blocks
+    const jsonMatch = cleanedJson.match(/```(?:json)?\n([\s\S]*?)\n```/);
+    if (jsonMatch && jsonMatch[1]) {
+      cleanedJson = jsonMatch[1].trim();
+    }
+
+    try {
+      // First, try to parse as is
+      parseJson = JSON.parse(cleanedJson);
+    } catch (initialError) {
+      console.log('Initial JSON parse failed, attempting to fix common issues...');
+
+      try {
+        // Try to fix common JSON issues
+        // 1. Remove trailing commas
+        let fixedJson = cleanedJson
+          .replace(/,(\s*[}\]])/g, '$1')
+          .replace(/([\{\[]\s*[\{\[]\s*)"([^"]+)"\s*(?=:)/g, '$1"$2"')
+          .replace(/\n/g, ' ')
+          .replace(/\r/g, ' ')
+          .replace(/\t/g, ' ')
+          .replace(/\s+/g, ' ')
+          .replace(/([^\\])\\/g, '$1\\\\')
+          .replace(/"([^"]*?)"(?=:)/g, (match) => `"${match.slice(1, -1).replace(/"/g, '\\"')}"`);
+
+        // 2. Try to find the first { and last } if the string is not properly formatted
+        const firstBrace = fixedJson.indexOf('{');
+        const lastBrace = fixedJson.lastIndexOf('}');
+
+        if (firstBrace >= 0 && lastBrace > firstBrace) {
+          fixedJson = fixedJson.substring(firstBrace, lastBrace + 1);
+        }
+
+        parseJson = JSON.parse(fixedJson);
+      } catch (finalError) {
+        console.error('Failed to parse JSON after cleanup:', {
+          original: cleanedJson,
+          error: finalError
+        });
+
+        // Try to extract any valid JSON part using a more permissive approach
+        try {
+          const jsonStart = Math.max(0, cleanedJson.indexOf('{'));
+          const jsonEnd = Math.min(cleanedJson.length, cleanedJson.lastIndexOf('}') + 1);
+          const possibleJson = cleanedJson.substring(jsonStart, jsonEnd);
+
+          parseJson = JSON.parse(possibleJson);
+        } catch (lastResortError) {
+          console.error('Final JSON parse attempt failed');
+          // If all else fails, create a minimal valid response
+          parseJson = {
+            roadmapTitle: "Career Roadmap",
+            description: "Generated roadmap with parsing issues",
+            initialNodes: [{
+              id: 'error-node',
+              type: 'error',
+              position: { x: 0, y: 0 },
+              data: {
+                title: 'Error Processing Roadmap',
+                description: 'There was an issue processing the roadmap data.',
+                bgColor: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                borderColor: '#dc2626',
+              }
+            }],
+            initialEdges: []
+          };
+
+          console.error('Using fallback roadmap due to parsing error:', lastResortError);
+        }
+      }
+    }
     const saveToDb = await step.run('SaveToDb', async () => {
       try {
         const result = await db.insert(HistoryTable).values({
@@ -404,13 +658,13 @@ export const AiCoverLetterAgent = inngest.createFunction(
     const { coverLetterId, jobTitle, companyName, jobDescription, userEmail } = await event.data;
 
     const userInput = `Job Title: ${jobTitle}\nCompany: ${companyName}\n\nJob Description:\n${jobDescription}`;
-    
+
     const coverLetterResult = await AiCoverLetterGeneratorAgent.run(userInput);
     //@ts-ignore
     const rawContent = coverLetterResult.output[0]?.content;
     const rawContentJson = rawContent.replace('```json', '').replace('```', '');
     const parseJson = JSON.parse(rawContentJson);
-    
+
     const saveToDb = await step.run('SaveToDb', async () => {
       try {
         const result = await db.insert(HistoryTable).values({

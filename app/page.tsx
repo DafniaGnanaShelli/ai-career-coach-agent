@@ -1,7 +1,9 @@
 "use client"
 import Image from "next/image";
-
-import { SignIn, SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import { Sparkles, TrendingUp, FileText, Route, MessageSquare, Target, Award, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
 
@@ -9,140 +11,236 @@ export default function Home() {
   const { user } = useUser();
 
   return (
-    <div>
-      <header className="flex  flex-wrap sm:justify-start  sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-neutral-800 dark:border-neutral-700">
-        <nav className="relative  p-4 max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
-          <div className="flex items-center justify-between">
-            <div>
-              <Image src={'/logo.svg'} alt="logo" width={150} height={150} />
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Header */}
+      <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <nav className="container flex h-16 items-center justify-between px-4 mx-auto">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
+              <div className="h-10 w-10 rounded-lg bg-gradient-to-tr from-[#1FA2FF] via-[#4568DC] to-[#B06AB3] flex items-center justify-center">
+                <Sparkles className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-[#1FA2FF] via-[#4568DC] to-[#B06AB3] bg-clip-text text-transparent">
+                  ARIA AI
+                </h1>
+                <p className="text-xs text-gray-500">Career Coach Agent</p>
+              </div>
             </div>
           </div>
-          <div id="navbar-collapse-with-animation" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end sm:ps-7 cursor-pointer">
-
-              {/* Clerk Authentication  */}
-              {!user ? <SignInButton mode='modal' signUpForceRedirectUrl={'/dashboard'}>
-                <div className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 sm:border-s sm:border-gray-300 py-2 sm:py-0 sm:ms-4 sm:my-6 sm:ps-6 dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-blue-500" >
-                  <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                  </svg>
+          <div className="flex items-center gap-4">
+            {!user ? (
+              <SignInButton mode="modal" signUpForceRedirectUrl="/dashboard">
+                <Button className="bg-gradient-to-r from-[#1FA2FF] via-[#4568DC] to-[#B06AB3] hover:opacity-90 transition-opacity">
                   Get Started
-                </div>
+                </Button>
               </SignInButton>
-                :
+            ) : (
+              <div className="flex items-center gap-3">
+                <Link href="/dashboard">
+                  <Button variant="outline">Go to Dashboard</Button>
+                </Link>
                 <UserButton />
-              }
-            </div>
+              </div>
+            )}
           </div>
         </nav>
       </header>
-      <div className="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] dark:before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-element.svg')] before:bg-no-repeat before:bg-top before:bg-cover before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
-        <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
-
-          <div className="flex justify-center">
-            <a className="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-sm text-gray-800 p-1 ps-3 rounded-full transition hover:border-gray-300 dark:bg-neutral-800 dark:border-neutral-700 dark:hover:border-neutral-600 dark:text-neutral-200"
-              href="tubeguruji.com" target="_blank">
-              TUBEGURUJI Membership - Join Now
-              <span className="py-1.5 px-2.5 inline-flex justify-center items-center gap-x-2 rounded-full bg-gray-200 font-semibold text-sm text-gray-600 dark:bg-neutral-700 dark:text-neutral-400">
-                <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-              </span>
-            </a>
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 py-20 md:py-32">
+        <div className="flex flex-col items-center text-center space-y-8">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-full px-4 py-2">
+            <Award className="h-4 w-4 text-blue-600" />
+            <span className="text-sm font-medium text-gray-700">AI-Powered Career Intelligence</span>
           </div>
-
-
-
-          <div className="mt-5 max-w-2xl text-center mx-auto">
-            <h1 className="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200">
-              Build Something
-              <span className="bg-clip-text bg-gradient-to-tl from-blue-600 to-violet-600 text-transparent"> With NextJs</span>
-            </h1>
+          
+          <h1 className="max-w-4xl text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+            Your Career Journey,
+            <span className="bg-gradient-to-r from-[#1FA2FF] via-[#4568DC] to-[#B06AB3] bg-clip-text text-transparent">
+              {" "}Powered by AI
+            </span>
+          </h1>
+          
+          <p className="max-w-2xl text-lg md:text-xl text-gray-600">
+            Get personalized career advice, optimize your resume, generate compelling cover letters, and access AI-powered roadmaps to achieve your professional goals.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4">
+            {!user ? (
+              <SignInButton mode="modal" signUpForceRedirectUrl="/dashboard">
+                <Button size="lg" className="bg-gradient-to-r from-[#1FA2FF] via-[#4568DC] to-[#B06AB3] hover:opacity-90 transition-opacity text-lg px-8">
+                  Start Your Journey
+                  <Sparkles className="ml-2 h-5 w-5" />
+                </Button>
+              </SignInButton>
+            ) : (
+              <Link href="/dashboard">
+                <Button size="lg" className="bg-gradient-to-r from-[#1FA2FF] via-[#4568DC] to-[#B06AB3] hover:opacity-90 transition-opacity text-lg px-8">
+                  Go to Dashboard
+                  <Sparkles className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            )}
+            <Link href="/ai-tools">
+              <Button size="lg" variant="outline" className="text-lg px-8">
+                Explore AI Tools
+              </Button>
+            </Link>
           </div>
-
-
-          <div className="mt-5 max-w-3xl text-center mx-auto">
-            <p className="text-lg text-gray-600 dark:text-neutral-400">
-              Revolutionize your content creation with our AI-powered app, delivering engaging and high-quality apps in seconds.</p>
+          
+          <div className="flex items-center gap-8 text-sm text-gray-600 pt-8">
+            <div className="flex items-center gap-2">
+              <Users className="h-5 w-5 text-blue-600" />
+              <span>1000+ Users</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Target className="h-5 w-5 text-blue-600" />
+              <span>AI-Powered Tools</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-blue-600" />
+              <span>Career Growth</span>
+            </div>
           </div>
-
-
-          <div className="mt-8 gap-3 flex justify-center">
-            <a className="inline-flex justify-center items-center 
-      gap-x-3 text-center bg-gradient-to-tl from-blue-600
-       to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent cursor-pointer text-white text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-gray-600 py-3 px-4 dark:focus:ring-offset-gray-800"
-              href="/dashboard">
-              Get started
-              <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-            </a>
-
-          </div>
-
-
-
         </div>
-      </div>
+      </section>
 
 
-      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 items-center gap-2">
-
-          <a className="group flex flex-col justify-center hover:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800" href="#">
-            <div className="flex justify-center items-center size-12 bg-blue-600 rounded-xl">
-              <svg className="flex-shrink-0 size-6 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="10" height="14" x="3" y="8" rx="2" /><path d="M5 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-2.4" /><path d="M8 18h.01" /></svg>
-            </div>
-            <div className="mt-5">
-              <h3 className="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">25+ templates</h3>
-              <p className="mt-1 text-gray-600 dark:text-neutral-400">Responsive, and mobile-first project on the web</p>
-              <span className="mt-2 inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 group-hover:underline font-medium">
-                Learn more
-                <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-              </span>
-            </div>
-          </a>
-
-          <a className="group flex flex-col justify-center hover:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800" href="#">
-            <div className="flex justify-center items-center size-12 bg-blue-600 rounded-xl">
-              <svg className="flex-shrink-0 size-6 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 7h-9" /><path d="M14 17H5" /><circle cx="17" cy="17" r="3" /><circle cx="7" cy="7" r="3" /></svg>
-            </div>
-            <div className="mt-5">
-              <h3 className="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">Customizable</h3>
-              <p className="mt-1 text-gray-600 dark:text-neutral-400">Components are easily customized and extendable</p>
-              <span className="mt-2 inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 group-hover:underline font-medium">
-                Learn more
-                <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-              </span>
-            </div>
-          </a>
-
-          <a className="group flex flex-col justify-center hover:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800" href="#">
-            <div className="flex justify-center items-center size-12 bg-blue-600 rounded-xl">
-              <svg className="flex-shrink-0 size-6 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></svg>
-            </div>
-            <div className="mt-5">
-              <h3 className="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">Free to Use</h3>
-              <p className="mt-1 text-gray-600 dark:text-neutral-400">Every component and plugin is well documented</p>
-              <span className="mt-2 inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 group-hover:underline font-medium">
-                Learn more
-                <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-              </span>
-            </div>
-          </a>
-
-          <a className="group flex flex-col justify-center hover:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800" href="#">
-            <div className="flex justify-center items-center size-12 bg-blue-600 rounded-xl">
-              <svg className="flex-shrink-0 size-6 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z" /><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1" /></svg>
-            </div>
-            <div className="mt-5">
-              <h3 className="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">24/7 Support</h3>
-              <p className="mt-1 text-gray-600 dark:text-neutral-400">Contact us 24 hours a day, 7 days a week</p>
-              <span className="mt-2 inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 group-hover:underline font-medium">
-                Learn more
-                <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-              </span>
-            </div>
-          </a>
-
+      {/* Features Section */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">AI-Powered Career Tools</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Leverage cutting-edge AI technology to accelerate your career growth and make smarter decisions
+          </p>
         </div>
-      </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Resume Analyzer */}
+          <div className="group relative bg-white rounded-2xl p-6 border border-gray-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity" />
+            <div className="relative">
+              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-4">
+                <FileText className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Resume Analyzer</h3>
+              <p className="text-gray-600 mb-4">
+                Get instant AI-powered feedback on your resume with detailed scoring and improvement suggestions
+              </p>
+              <Link href="/ai-tools/ai-resume-analyzer" className="text-blue-600 font-medium inline-flex items-center group-hover:gap-2 transition-all">
+                Try it now
+                <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Cover Letter Generator */}
+          <div className="group relative bg-white rounded-2xl p-6 border border-gray-200 hover:border-purple-300 hover:shadow-xl transition-all duration-300">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity" />
+            <div className="relative">
+              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mb-4">
+                <FileText className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Cover Letter Generator</h3>
+              <p className="text-gray-600 mb-4">
+                Create professional, tailored cover letters that stand out and get results
+              </p>
+              <Link href="/ai-tools/ai-cover-letter-generator" className="text-purple-600 font-medium inline-flex items-center group-hover:gap-2 transition-all">
+                Try it now
+                <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Career Roadmap */}
+          <div className="group relative bg-white rounded-2xl p-6 border border-gray-200 hover:border-indigo-300 hover:shadow-xl transition-all duration-300">
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity" />
+            <div className="relative">
+              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center mb-4">
+                <Route className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Career Roadmap</h3>
+              <p className="text-gray-600 mb-4">
+                Generate personalized learning roadmaps with step-by-step guidance for your career path
+              </p>
+              <Link href="/ai-tools/ai-roadmap-agent" className="text-indigo-600 font-medium inline-flex items-center group-hover:gap-2 transition-all">
+                Try it now
+                <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Career Chat */}
+          <div className="group relative bg-white rounded-2xl p-6 border border-gray-200 hover:border-pink-300 hover:shadow-xl transition-all duration-300">
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-50 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity" />
+            <div className="relative">
+              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center mb-4">
+                <MessageSquare className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Career Chat</h3>
+              <p className="text-gray-600 mb-4">
+                Get instant answers to your career questions from our AI career coach
+              </p>
+              <Link href="/ai-tools/ai-qa-chat" className="text-pink-600 font-medium inline-flex items-center group-hover:gap-2 transition-all">
+                Try it now
+                <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="bg-gradient-to-tr from-[#1FA2FF] via-[#4568DC] to-[#B06AB3] rounded-3xl p-12 md:p-16 text-center text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Ready to Transform Your Career?
+          </h2>
+          <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+            Join thousands of professionals using ARIA AI to accelerate their career growth
+          </p>
+          {!user ? (
+            <SignInButton mode="modal" signUpForceRedirectUrl="/dashboard">
+              <Button size="lg" className="bg-white text-[#4568DC] hover:bg-gray-100 text-lg px-8">
+                Get Started for Free
+                <Sparkles className="ml-2 h-5 w-5" />
+              </Button>
+            </SignInButton>
+          ) : (
+            <Link href="/dashboard">
+              <Button size="lg" className="bg-white text-[#4568DC] hover:bg-gray-100 text-lg px-8">
+                Go to Dashboard
+                <Sparkles className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          )}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t bg-gray-50">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-[#1FA2FF] via-[#4568DC] to-[#B06AB3] flex items-center justify-center">
+                <Sparkles className="h-5 w-5 text-white" />
+              </div>
+              <span className="font-semibold">ARIA AI Career Coach Agent</span>
+            </div>
+            <p className="text-sm text-gray-600">
+              © 2024 ARIA AI. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
 
     </div>
   );

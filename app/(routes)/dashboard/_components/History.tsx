@@ -50,7 +50,7 @@ function History() {
         </div>
         :
         <div>
-          {userHistory?.map((history: any, index: number) => (
+          {userHistory.map((history: any, index: number) => (
             <Link key={index} href={history?.aiAgentType + "/" + history?.recordId} className='flex justify-between items-center my-3 border p-3 rounded-lg'>
               <div className='flex gap-5'>
 
