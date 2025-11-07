@@ -3,20 +3,8 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
-import { Calendar, Mail, User, FileText, Route as RouteIcon, Sparkles, MessageSquare, History, Settings, ChevronRight, Network } from 'lucide-react'
+import { Calendar, Mail, User, FileText, Route as RouteIcon, Sparkles, MessageSquare, History, Settings, ChevronRight } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import dynamic from 'next/dynamic';
-
-// Dynamically import NetworkGraph to avoid SSR issues with ReactFlow
-const NetworkGraph = dynamic(() => import('@/components/NetworkGraph'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-[500px] flex items-center justify-center bg-gray-50 rounded-xl">
-      <div className="animate-pulse text-gray-500">Loading interactive graph...</div>
-    </div>
-  ),
-});
 type ActivityHistory = {
   recordId: string;
   aiAgentType: string;
@@ -41,7 +29,7 @@ type ActivityTypeInfo = {
   textColor: string;
 };
 
-function ProfilePage() {
+const ProfilePage: React.FC = () => {
   const { user, isLoaded } = useUser();
   const [history, setHistory] = useState<ActivityHistory[]>([]);
   const [loading, setLoading] = useState(true);
@@ -60,7 +48,7 @@ function ProfilePage() {
     load();
   }, []);
 
-  const stats = useMemo<{ total: number; resume: number; roadmap: number; cover: number }>(() => {
+  const stats = useMemo<{ total: number; resume: number; roadmap: number; cover: number; chat: number }>(() => {
     const total = history.length;
     const byType = (path: string) => history.filter(h => h.aiAgentType === path).length;
     return {
@@ -81,19 +69,6 @@ function ProfilePage() {
 
   return (
     <div className='space-y-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
-      {/* Network Graph Section */}
-      <div className='space-y-4'>
-        <div className='flex items-center gap-3'>
-          <Network className='h-6 w-6 text-blue-600' />
-          <h2 className='text-2xl font-bold text-gray-900'>Your Career Journey</h2>
-        </div>
-        <p className='text-gray-600 mb-4'>
-          Visualize your progress through different career development tools and resources.
-        </p>
-        <div className='bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden' style={{ height: '600px' }}>
-          <NetworkGraph className='h-full w-full' />
-        </div>
-      </div>
       {/* Header */}
       <Card className='border-0 shadow-sm bg-gradient-to-r from-blue-600 to-indigo-700 text-white overflow-hidden'>
         <CardHeader className='pb-0'>

@@ -1,5 +1,5 @@
 {
-  "name": "AI carreer coach",
+  "name": "ai-career-coach",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -45,8 +45,8 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
     "@types/uuid": "^10.0.0",
     "drizzle-kit": "^0.31.5",
     "postcss": "^8",

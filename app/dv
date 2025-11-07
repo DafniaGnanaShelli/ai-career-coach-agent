@@ -1,0 +1,33 @@
+// function RoadmapCanvas({ initialNodes, initialEdges }: any) {
+
+//     const fixedNodes = initialNodes.map((n: any) => ({
+//         ...n,
+//         type: n.type === 'default' ? 'turbo' : n.type,
+//     }));
+
+//     const fixedEdges = initialEdges.map((e: any) => ({
+//         ...e,
+//         sourceHandle: e.sourceHandle || 'output',
+//         targetHandle: e.targetHandle || 'input',
+//     }));
+//     const nodeTypes = {
+//         turbo: TurboNode
+//     }
+
+//     return (
+//         <div style={{ width: '100%', height: '100%' }}>
+//             <ReactFlow
+//                 nodes={fixedNodes
+//                 }
+//                 edges={fixedEdges}
+//                 fitView
+//                 nodeTypes={{ turbo: TurboNode }}
+//             >
+//                 <Controls />
+//                 <MiniMap></MiniMap>
+//                 {/* @ts-ignore */}
+//                 <Background variant='dots' gap={12} size={1}></Background>
+//             </ReactFlow>
+//         </div>
+//     );
+// }
